@@ -1,0 +1,1 @@
+Bu web sitesi hakkımdaki tüm kirli çamaşırları açığa çıkarmaktadır. :)
