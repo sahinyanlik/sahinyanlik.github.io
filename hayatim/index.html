@@ -1,263 +1,113 @@
-<!DOCTYPE html>
-<meta charset="UTF-8">
-<title>Life</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
-<style>
-*{
-	font-family: Open Sans, Helvetica, Arial, sans-serif;
-}
-body{
-	color: #fff;
-	background-color: #384047;
-	margin: 0;
-	padding: 0;
-	font-size: 12px;
-	-webkit-text-size-adjust: none;
-	position: relative;
-}
-a{
-	color: #fff;
-}
-header{
-	position: fixed;
-	bottom: 0;
-	margin: 0;
-	padding: 20px;
-}
-header a{
-	margin-left: 1em;
-	opacity: .3;
-	text-decoration: none;
-}
-header a:hover{
-	opacity: .7;
-	text-decoration: underline;
-}
-h1{
-	display: inline;
-	font-size: 20px;
-	font-weight: normal;
-	line-height: 1em;
-	opacity: .5;
-	z-index: 3;
-	font-weight: 300;
-	white-space: nowrap;
-}
-#life{
-	padding-top: 40px;
-	padding-bottom: 5em;
-}
-#life section.year{
-	box-sizing: border-box;
-	border-left: 1px dashed rgba(255,255,255,.1);
-	color: rgba(255,255,255,.3);
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	padding-left: 10px;
-	padding-top: 10px;
-	pointer-events: none;
-	font-weight: 300;
-	white-space: nowrap;
-}
-#life .event{
-	padding-right: 20px;
-	padding-bottom: 5px;
-	vertical-align: middle;
-	white-space: nowrap;
-}
-#life .event b{
-	font-weight: normal;
-	color: rgba(255,255,255,.5);
-}
-#life .event .time{
-	vertical-align: middle;
-	display: inline-block;
-	overflow: hidden;
-	height: 0;
-	border: 4px solid #fff;
-	border-radius: 4px;
-	margin-right: 10px;
-	opacity: .3;
-	position: relative;
-	left: -2px;
-}
-#life .event:hover .time{
-	opacity: .5;
-}
-</style>
-<header>
-	<h1 id="title">Hayatım</h1>
-	
-</header>
-<div id="life"></div>
-<script>
-(function(){
-	var life = {
-		$title: document.getElementById('title'),
-		$el: document.getElementById('life'),
-		yearLength: 120, // 120px per year
-		start: function(){
-			life.loadConfig(function(config){
-				if (config.yearLength) life.yearLength = config.yearLength;
-				if (config.customStylesheetURL) life.injectStylesheet(config.customStylesheetURL);
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Sahin Yanlik - GitHub</title>
 
-				life.fetch(function(response){
-					var data = life.parse(response);
-					var title = life.parseTitle(response);
-					life.render(title, data);
-				});
-			});
-		},
-		loadConfig: function(fn){
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'config.json', true);
-			xhr.onload = function(){
-				if (xhr.status == 200){
-					fn(JSON.parse(xhr.responseText));
-				} else {
-					fn({});
-				}
-			};
-			xhr.onerror = xhr.onabort = function(){
-				fn({});
-			};
-			xhr.send();
-		},
-		injectStylesheet: function(url){
-			var link = document.createElement('link');
-			link.rel = 'stylesheet';
-			link.href = url;
-			document.body.appendChild(link);
-		},
-		fetch: function(fn){
-			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'life.md', true);
-			xhr.onload = function(){
-				if (xhr.status == 200) fn(xhr.responseText);
-			};
-			xhr.send();
-		},
-		parse: function(response){
-			var list = response.match(/\-\s+[^\n\r]+/ig);
-			var data = [];
-			list.forEach(function(l){
-				var matches = l.match(/\-\s+([\d\/\-\~]+)\s(.*)/i);
-				var time = matches[1];
-				var text = matches[2];
-				data.push({
-					time: life.parseTime(time),
-					text: text
-				});
-			});
-			return data;
-		},
-		parseTitle: function(response){
-			return response.match(/[^\r\n]+/i)[0];
-		},
-		parseTime: function(time, point){
-			if (!point) point = 'start';
-			var data = {};
-			if (/^\~\d+$/.test(time)){ // ~YYYY
-				data = {
-					startYear: parseInt(time.slice(1), 10),
-					estimate: true
-				};
-			} else if (/^\d+$/.test(time)){ // YYYY
-				data[point + 'Year'] = parseInt(time, 10);
-			} else if (/^\d+\/\d+$/.test(time)){ // MM/YYYY
-				var t = time.split('/');
-				data[point + 'Month'] = parseInt(t[0], 10);
-				data[point + 'Year'] = parseInt(t[1], 10);
-			} else if (/^\d+\/\d+\/\d+$/.test(time)){ // DD/MM/YYYY
-				var t = time.split('/');
-				data[point + 'Date'] = parseInt(t[0], 10);
-				data[point + 'Month'] = parseInt(t[1], 10);
-				data[point + 'Year'] = parseInt(t[2], 10);
-			} else if (/\d\-/.test(time)){ // TIME-TIME
-				var splitTime = time.split('-');
-				var startTime = life.parseTime(splitTime[0]);
-				var endTime = life.parseTime(splitTime[1], 'end');
-				for (var k in startTime) { data[k] = startTime[k] }
-				for (var k in endTime) { data[k] = endTime[k] }
-			} else if (time == '~'){ // NOW
-				var now = new Date();
-				data.endYear = now.getFullYear();
-				data.endMonth = now.getMonth()+1;
-				data.endDate = now.getDate();
-			}
-			data.title = time;
-			return data;
-		},
-		firstYear: null,
-		renderEvent: function(d){
-			var firstYear = life.firstYear;
-			var yearLength = life.yearLength;
-			var monthLength = yearLength/12;
-			var dayLength = monthLength/30;
+    <link rel="stylesheet" href="../stylesheets/styles.css">
+    <link rel="stylesheet" href="../stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9:all.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://sahinyanlik.github.io">Ana Sayfa<a></h1>
+        <p><a href="http://sahinyanlik.com.tr">Web Sayfam</a></p>
+                <p><a href="/is_basvurularim/index.html">İş Başvurularım</a></p>
+        <p><a href="/is_hayatim/index.html">İş Hayatım</a></p>
+        <p><a href="/hayatim/index.html">Hayatım</a></p>
+        <p class="view"><a href="https://github.com/sahinyanlik">GitHub Profilim</a></p>
 
-			var time = d.time;
-			var estimate = time.estimate;
-			var startYear = time.startYear;
-			var startMonth = time.startMonth;
-			var startDate = time.startDate;
-			var endYear = time.endYear;
-			var endMonth = time.endMonth;
-			var endDate = time.endDate;
-			var width = 0;
+      </header>
+      <section>
+        <h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>
+<em>06.11.2013</em></h3>
 
-			// Calculate offset
-			var startTime = new Date(firstYear, 0, 1);
-			var endTime = new Date(startYear, startMonth ? startMonth-1 : 0, startDate || 1);
-			var daysDiff = (endTime - startTime)/(24*60*60*1000);
-			offset = daysDiff*dayLength;
+<p>Bu günün buraya yazmamı gerektirecek bir kaç özelliği var. Öncelikle yeni bir kız ile tanıştım. Tabi şu anda işi olan ve hayatı yaşamaya değer bulan bir pozisyonda olduğumu söyleyebilir.
+Şimdilik pek birbirimizle konuşmuyoruz. Komik ama evet öyle. Kendisi pek mesajlaşma ve konuşma taraftarı değil. O yüzden bende pek yormuyorum kendisini. Öğretmen olduğundan öğrenciler ile uğraşmak zorunda ve 
+pekte bana ilgi gösterecek durumda değil. En azından şimdilik ... <br>
+Bu akşam ilk görüşmemizi gerçekleştireceğiz. Üstümde kareli bir gömlek ve işyerine gidermiş havasında gitmeyi düşünüyorum. Her ne kadar takım elbiseli insanlardan bıkmışta olsa 
+ayrıca giyecek pek bir kıyafetim yok. Bu yokluk istememekten kaynaklanıyor o ayrı. Neyse araştırdım kızları biraz daha her zamanki ilk görüşmeden önce yapılan gibi
+Uyulması gereken bazı öneriler var.
+    <ul>
+        <li>Takım elbise giyinme!</li>
+        <li>Sürekli soru sorma</li>
+        <li>Gözlerinin içine bak ve kibar davran.</li>
+    </ul>
+    
+    <br>Aslında bu yazılanlar benim için o kadar zor bişey olmasada bunca zamandır işe yaramadığınıda biliyorum. Bir ara hediye alıp almama arasında kaldım. Fakat 
+    almamaya karar verdim. Çünkü yanlış anlaşılabilir. Eğer birbirimizden hoşlanırsak görüşmelerimiz devam eder böylece rahatça hediye alabilirim. Ciddi düşündüğüm birisi olduğundan 
+    herşeye daha fazla ilgi göstermem gerektiğini biliyorum. Ama görüşeceğim kişinin ilgisiz mi yoksa gerçekten haım görünmeye çalışan biri olup olmadığını anlayamıyorum.
+    Belki de herşeyi bu ilk görüşmeden soraya bırakmıştır. Bakalım bu akşam göreceğiz. 
+    
+</p>
+<p><em>Evet açıklıyorum kız ile babam vasıtasıyla görüşüyorum. Kendisi babamın okulunda öğretmen. Daha bu pazar mesaj attım ve çarşamba görüşüyoruz. Umarım iyi de geçer</em>
+    Bu birkaç günde eve genelde moralim bozuk gidiyorum. Bunun nedeni öğretmen hanımın beni değersiz duruma düşürdüğünü düşünmem oluyor. Hiç tepki verdiği olmuyor bu hanımefendinin.
+    Bu moral bozukluğum bizimkilere de yansıyor. Onlarda çok tedirgin, ne olduğunu anlayamıyorlar. Neyse bu gün herşeyin sonu artık. Dananın kuyruğunun koptuğu yere geldik.
+    
+</p>
 
-			// Calculate width
-			if (endYear){
-				var _endMonth = endMonth ? endMonth-1 : 11;
-				var _endDate = endDate || new Date(endYear, _endMonth+1, 0).getDate();
-				startTime = new Date(startYear, startMonth ? startMonth-1 : 0, startDate || 1);
-				endTime = new Date(endYear, _endMonth, _endDate);
-				daysDiff = (endTime - startTime)/(24*60*60*1000);
-				width = daysDiff*dayLength;
-			} else {
-				if (startDate){
-					width = dayLength
-				} else if (startMonth){
-					width = monthLength;
-				} else {
-					width = yearLength;
-				}
-			}
+<h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>
+<em>07.11.2013</em></h3>
+<p>Görüşmeden bahsedeyim; 2 kişiyle beraber gelmişlerdi. Sanırım bunu başkalarının da fikrini almak ve ilk muhabbeti açabilmek için yaptı. Çok beğendim aslında
+    bu tavrını. Bir süre oturduk muhabbet ettik sonra her zamanki ilk tanışmalarda olduğu gibi bir ölüm sessizliği oldu. Sonrasında onlar da ikea'ya gittiler
+    . Artık yalnız kalmıştık, ben konuştum o sustu ben konuştum o sustu ben konuştukça arada bir bişeyler söylemeye başladı. Saymadım ama bana max. 2-3 soru sormuş
+    olabilir. Arada bir gülüyor, bazı şeyleri umursamadığını belli etmek istiyordu. Gerçekten ayrı bir havası vardı. Rahat bir o kadar da tedirgindi. 
+    Çok sade bir o kadar gösterişliydi, aşık olmaya başladım sanki ama bir türlü konuşturamadım. Neden konuşmuyor hala çözemedim. <br>
+    Eve geldiğimde sevinçliydim, fakat hep içimde bir tedirginlik vardı ya beğenmezse diye. Aslında hala daha beğenip beğenmediğini, devam edip 
+    etmek istemediğini bilmiyorum. Tek düşüncem onunla daha fazla konuşabilmek ve beni görmesini sağlamaktı. Belki yapabildim belki de çok sönük kaldım. 
+    Bu sabah her zamanki gibi günaydını ben dedim ve her zamanki gibi cevabı oldukça geç geldi hatta gelmedi, sonra interneti kapattığını söyledi. Ne telefonla konuşa
+    biliyoruz ne de başka birşey var. Bazen düşünüyorum belki beni sadece baş belası olarak görüyor. Belki de ne kadar hoşlanmış olursam olayım bırakmalıyım. 
+    Devam edip etmek istemediğini sordum birşey söylemedi, derse girmiş olabilir. Asla uzun cevap vermesini beklemiyorum. Evet veya hayır diyecek. Bende her zamanki 
+    gibi ikisinin altına yatan nedenleri düşüneceğim.
+    
+    Edit: Beklediğim cevap geldi = Hayır.
+</p>
 
-			return '<div class="event" style="margin-left: ' + offset.toFixed(2) + 'px"><div class="time" style="width: ' + width.toFixed(2) + 'px"></div><b>' + d.time.title + '</b> ' + d.text + '&nbsp;&nbsp;</div>';
-			return '';
-		},
-		render: function(title, data){
-			document.title = title;
-			life.$title.innerHTML = title;
+<h3>
+    <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>
+    <em>08.11.2013</em></h3>
+    <p>Görüşme sonrası halden belli olduğu üzere pek konuşmayı canım çekmedi. Hayallerim varmıydı bilmiyorum, fakat şu anda yok biliyorum. 
+        Aklıma Ahmet tellinin kalbim katlanma bu dünyaya şiiri geliyor sürekli.
+        <blockquote>Anılar biriktikçe sisleniyor aşklarda <br>
+Yitiriliyor serüven duygusu ki o zaman <br>
+Şeytanımı koluma takıp gitmeliyim <br>
+Yeni bir cehennem kurmalıyım kendime <br>
+Hep kendini yineliyorken sesler kokular <br>
+Gittikçe birbirine benziyorken dünle bugün <br>
+Ölümsüz olmak kadar ürkünç birşey <br>
+Bu dünyaya alışmak duygusu <br>
 
-			var firstYear = life.firstYear = data[0].time.startYear;
-			var nowYear = new Date().getFullYear();
-			var dayLength = life.yearLength/12/30;
+Sonsuza kadar sonsuzluğa asılı kalmak <br> 
+Tanrılara ödül insanoğluna cezaysa <br>
+Kalbim bağışlanmayacak birşey yap <br>
+Katlanma kendine ve bu dünyaya <br>
 
-			html = '';
-			var days = 0;
+Kalbim ödünç say sana ayrılan ne varsa <br> 
+Geri vermiştin dinini <br>
+Dilini de unut artık <br>
+Aztektin yahut Kürt, hüznünse Kızılderili <br> 
+Geri ver ne kalmışsa sende, umutların dahil <br>
+Hiçlik, o sezdiren keder <br>
+Buydu senin payın <br>
+Duyumsa sülfürün yarışını <br> 
+Seni vur ,seni bekleme, seni tarihsiz kıl <br> 
+Bir kartala parçalat seni kayalara zincirleyerek <br> 
+Kurbanla kurban eden bilinmiyor tarihe bakarsan <br>
+Bir efsaneydi yaşamak, sende bilmiyorsun bunu <br>
+Medyomdu kimya bir senfoninin diliydi belki <br>
+Yeni cehennemler kurmuştuk bilinebilir şeylerden<br> 
+Sözünü tut artık, seni tarihsiz kıl <br>
+Ve katlanma bu dünyaya ey kalbim</blockquote>
+    </p>
 
-			for (var y=firstYear, age = 0; y<=nowYear+1; y++, age++){
-				html += '<section class="year" style="left: ' + (days*dayLength) + 'px">' +
-					y + ' (' + age + ')' +
-					'</section>';
-				days += (y % 4 == 0) ? 366 : 365;
-			}
-			data.forEach(function(d){
-				html += life.renderEvent(d);
-			});
-			life.$el.innerHTML = html;
-		}
-	}
-
-	life.start();
-})();
-</script>
+  <script src="../javascripts/scale.fix.js"></script>
+  </body>
+</html>
