@@ -1,0 +1,16 @@
+---
+layout: post
+title: Java da yazdığınız yazıyı tersten yazdırın!
+date: '2007-03-22T07:37:00.000-07:00'
+author: Şahin
+tags:
+- cevirme
+- program
+- geri
+- java
+modified_time: '2007-03-22T07:54:01.312-07:00'
+blogger_id: tag:blogger.com,1999:blog-29334203.post-7914600819176395500
+blogger_orig_url: https://sahinyanlik.blogspot.com/2007/03/java-da-yazdnz-yazy-tersten-yazdrn.html
+---
+
+Merhaba arkadaşlar,Javayı daha önceden hiç anlatmadım ama heralde hepiniz internetten tavla satranç vs. oyunlar oynamışsınızdır .İşte o oyunları oynayabilmeniz için bilgisayarınıza java virtual machine yüklenmelidir.Yani binevi  kendi programı için bilgisayarda bir küçük işletim sistem kuruyo diyebiliriz heralde.Şimdi daha önceden yazdığım bir programı sizinle paylaşmak istiyorum.Bu programda amaç yazdığımız yazıyı tersten yazdırmak,ne işe yarar demeyin programla dersi sorusudur.:)Bilgisayarınızda düzenleyici olarak Jgrasp kullandığınızı varsayıyorum.Çünkü programı yazarken kullandığım Keyboard sınıfı bu programın kendi içinde mevcuttur.Şimdi programımıza geçelim<br /><br /><span style="font-style: italic;">import cs1.Keyboard;<br />public class GeriCevirme<br />{<br />    public static String dondur(String data)<br />        {<br />            String geri="";    //</span><span style="font-weight: bold;">burada amacımız bir degiskene bos bi deger atamak<br />            </span><span style="font-style: italic;">for int(j=data.length</span>()-1;j>=0;j--);   //<span style="font-weight: bold;">Burada ise bir döngü oluşturduk ve bu döngü j degeri yani girdiğimiz değer  '0' dan büyük olduğu ve yazdığımız yazının büyüklüğünden bir eksik oluncaya kadar döngü yaparak sayıyı azaltıyor.<br />          </span><span style="font-style: italic;"><span style="font-style: italic;">geri +=data.charAt(</span></span><span style="font-weight: bold;"><span style="font-style: italic;"></span>j);    / /</span>geri değişkenine her dönmede girdiğimiz değerin sonundaki değeri atıyor sondaki başa geçinceye kadar döngü devam ettiğinden cümle tam anlamıyla dönmüş oluyor.<br />            public static void main(String args[]) //Programa baslıyoruz<br />    {<br />        String a; //string bir a degeri girio ardından bunu keyboard sınıfımızdaki readString ile okutacağız.<br />        a= Keyboard.readString();<br />        System.out.println(cevir(a)); //en sonunda artık muradımıza erdik hayırlı olsun<br />        }<br />        }<br /><br />           <br /><span style="font-style: italic;"><br /></span>
