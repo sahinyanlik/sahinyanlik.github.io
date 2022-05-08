@@ -1,0 +1,17 @@
+---
+layout: post
+title: "Koku - Patrick Suskind"
+
+Kitabi okumaya baslamadan once filmi izlediğimi söylemeliyim. Aslında bunu daha önce Sefiller kitabında da yapmıştım. Gérard Depardieu'nun oynadığı Sefiller serisi o kadar hosuma gitmiştiki babamın aldığı 5 ciltlik kitabı baya kısa sürede okumustum. Bundan dolayı Koku kitabından da aslında böyle bir performans bekliyordum. Tam hayal kırıklığı olmasa da beklediğimi bulamadım. Belki bu aralar Zafer (oğlum) ile ilgileniyor olmam da bu okumayı etkilemiş olabilir. 
+
+Beklentim filmde anlatılamayacak olayların daha iyi betimlenmesiydi. Örneğin ana karakterin(Grenouille) yaptıklarını daha cazip kılabileceğini düşünüyordum. Fikir olarak harika bir kitap olmasına rağmen biraz daha uzun olup olaydan ziyade insanların o günkü olaylara, birbirlerine, dünyaya olan görüşleri daha fazla yargılanabilirdi. Felsefi bir boyut getirilebilirdi kitaba. Bazı yerlerde bunu görsem de tam olarak ya ben algılayamadım ya da gerçekten böyle bir amaç gitmemiş yazar.
+
+Kitap hakkında spoiler vererek şu şekilde anlatabilirim
+
+Grenouille Paris'te dünyaya gelmiştir. Bebekliğinden beri onu kimse sevmemiş bir oradan bir buraya sürekli savrulmuştur. Burada halkın büyük bir suçu olduğu aşikar. Fakat kendisi bunlardan hiç yakınmamıştır. Koklayabildiği hiç bir şeyi unutmayan ve bunları var oldukları gibi üretebilen bir kişidir. Bundan dolayı bir çok kişiye para kazandırsa da aslında kendisi için para hiç sorun olmamıştır. Sanki bedava çalışan bir köle gibi çalışmış sonrasında da hiç bir mükafat alamamıştır. Yıllarca yalnızlığı iliklerine kadar yaşamış ve orada kendini bulabilmiştir. 
+
+En son hayatına mal olacak olay ise şu şekildedir, daha önceden genç bir kızın kokusunu sürekli yanında taşıyabilmek için öldürdüğü olmuştu. Fakat bu seferki amacı mükemmel kokuyu bulmaktı. Bunun için şehrin etrafında gezip genç kızların kokularını aldı ve onları teker teker öldürdü. En sonuncusunda ise kızın babası öncesinde Grenouille'yi gördü. Bundan dolayı polisin bu kişiyi bulması çok zor olmadı. İhbar ile bulundu ve idam sehpasına getirildi. Bu sırada kızlardan oluşturduğu kokuyu süren Grenouille herkese bir tanrı gibi göründü ve insanlar zevkin en uç noktalarında hissettiler kendilerini. Hatta soyundular ve seviştiler. Grenouille burada ikileme düştü, kendisini sevenlerin olması onu hiç mutlu etmemişti. Aslında tüm hayatı boyunca bunun için uğraştığını fakat gerçekten de değmeyecek birşey olduğunu o anda anladı.Bu düşünce onun sonuna neden olacaktı. İdam sehbasında tanrılığı ilan edildi fakat onun isteği farklıydı. Geri Paris'e döndü ve orada evsizler, hırsızlar, katillerin olduğu bir mekanda tüm hazırladığı parfümü üstüne boca etti. Tabi insanlar zevkten ne yapacaklarını bilemediler. Herkes önce Grenouille'nin elbiselerini yırttı, sonra elleriyle ağızlarını bacaklarını koparmaya çalıştılar. Fakat bu da zordu en son bıçaklar ile parça parça edip yediler. Sonrasında hiç kendilerine geldiklerinde sanki hiç bir şey olmamış gibi ateşin etrafında oturdular. Tıpkı idam yapılacağı sırada tüm insanların çırıl çıplak olması ve sonrasında kimsenin bu olayı hatırlamamak için Grenouill'nin af edilmesi gibi.
+
+Peki hikayedeki alt metin neydi,
+
+Öncekikle toplum tarafından vurdum duymazlık ile karşılaşılan tüm olayların sonunda daha büyüdüğü ve kartopu etkisi yarattığını açıkça görebiliyoruz. Fakat bu kartopunun oluşmasını veya büyümesini engellemek mümkün müydü? Bunu daha çok düşünmem lazım. Her ne kadar şimdiki düşüncem hayır mümkün değildi yönünde ağır bassa dahi ilerde fikrim değişebilir.  
