@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Koku - Patrick Suskind"
-
+---
 Kitabi okumaya baslamadan once filmi izlediğimi söylemeliyim. Aslında bunu daha önce Sefiller kitabında da yapmıştım. Gérard Depardieu'nun oynadığı Sefiller serisi o kadar hosuma gitmiştiki babamın aldığı 5 ciltlik kitabı baya kısa sürede okumustum. Bundan dolayı Koku kitabından da aslında böyle bir performans bekliyordum. Tam hayal kırıklığı olmasa da beklediğimi bulamadım. Belki bu aralar Zafer (oğlum) ile ilgileniyor olmam da bu okumayı etkilemiş olabilir. 
 
 Beklentim filmde anlatılamayacak olayların daha iyi betimlenmesiydi. Örneğin ana karakterin(Grenouille) yaptıklarını daha cazip kılabileceğini düşünüyordum. Fikir olarak harika bir kitap olmasına rağmen biraz daha uzun olup olaydan ziyade insanların o günkü olaylara, birbirlerine, dünyaya olan görüşleri daha fazla yargılanabilirdi. Felsefi bir boyut getirilebilirdi kitaba. Bazı yerlerde bunu görsem de tam olarak ya ben algılayamadım ya da gerçekten böyle bir amaç gitmemiş yazar.
