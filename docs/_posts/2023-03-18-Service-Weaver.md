@@ -12,7 +12,7 @@ Uygulamayı normal Go interface'i olarak yazılmış component'lere bölmek yete
 
 Yani önce bir component'i weaver'a ekliyorsunuz sonra ise weaver'dan bu interface'i çağırıp çalıştırıyorsunuz. Aslında Spring-Context'e biraz benziyor fakat weaver arka tarafta bir çok sunucuda olabilen ve tüm beanleri diğer sunucularda da ayağa kaldıran bir engine olarak düşünülmeli. 
 
-## Peki ne gibi faydaları var.
+## Faydaları
 
 * Type sistemi olacağından dolayı versiyonlama, componentlerin bir biri ile uyumluluğu gibi sorunlar olmayacaktır.
 * Bu yapı ile aslında Erlang benzeri altta transparent network olan yani network üzerinden başka bir metodu trigger eden bir yapıyı Go'ya da yapmış oldular.
