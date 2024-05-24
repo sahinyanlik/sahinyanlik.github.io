@@ -1,7 +1,9 @@
 ---
 layout: page
-title: Kimim Ben
-permalink: /about/
+title: Now
+permalink: /now/
 ---
 
-q!
+Şu anda İstanbul'da bir firmada yazılım geliştirici olarak çalışmaktayım.
+Çoğunlukla java yazmakta ve bazen de devops süreçlerine dahil olmaktayım.
+
